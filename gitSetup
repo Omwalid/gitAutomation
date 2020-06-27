@@ -1,0 +1,25 @@
+#! /bin/bash
+
+#file script name is : gitSetup
+#description:
+#creation date Sat 27 Jun 12:34:18 CET 2020
+#Created by: omw
+
+
+#Enter local rep to create or init
+#Enter the url of the remote rep
+while [[ -z $localrep  ]] || [[ -z $remoterep ]];do
+read -p 'enter the local repository name: ' localrep;
+read -p 'enter the remote repository url: ' remoterep;
+done
+
+#cd to the dir where I put all my git work
+cd /home/omw/gitProjects
+
+git init $localrep
+cd $localrep
+echo "# $localrep" >> README2.md
+
+git remote add origin $remoterep
+git config --global credential.helper 'cache --timeout=3600'
+git pull origin master

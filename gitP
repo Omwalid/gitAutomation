@@ -1,0 +1,28 @@
+#! /bin/bash
+
+#file script name is : gitP
+#description:
+#creation date Sat 27 Jun 15:06:31 CET 2020
+#Created by: omw
+
+
+#check if a remote rep is added with the alias origin
+ if  ! git remote -v | grep 'origin' > /dev/null 2>&1
+ then echo "set a remote directory with the alias origin "
+ exit 1
+fi
+
+#check if we have set a commit message
+if [[ $# -eq 0  ]]
+ then echo "enter as a parameter between \"\" the commit message"
+ exit 1
+fi
+
+
+git add .
+git commit -m "$1"
+
+git pull origin master
+
+git config --global credential.helper 'cache --timeout=3600'
+git push origin master
